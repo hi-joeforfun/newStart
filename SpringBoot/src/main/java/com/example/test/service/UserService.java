@@ -6,4 +6,5 @@ public interface UserService {
 
     UserBean loginIn(String name,String password);
 
+    void  add(String name,String password);
 }

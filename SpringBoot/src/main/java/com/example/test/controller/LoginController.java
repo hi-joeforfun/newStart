@@ -1,6 +1,7 @@
 package com.example.test.controller;
 
 import com.example.test.bean.UserBean;
+import com.example.test.dto.LoginDto;
 import com.example.test.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,6 +29,7 @@ public class LoginController {
             return "error";
         }
     }
+
 
 
 

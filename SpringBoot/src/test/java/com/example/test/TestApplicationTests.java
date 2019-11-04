@@ -22,4 +22,9 @@ public class TestApplicationTests {
         System.out.println(userBean.getId());
     }
 
+    @Test
+    public void test1() {
+        userService.add("a","a");
+    }
+
 }
