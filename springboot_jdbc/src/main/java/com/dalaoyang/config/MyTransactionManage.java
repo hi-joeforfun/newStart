@@ -11,23 +11,23 @@ import java.sql.SQLException;
 @Component
 public class MyTransactionManage {
 
-    private ThreadLocal<Connection> connection;
+    private ThreadLocal<Connection> connection;//用ThreadLocal隔离每个connection 链接 让事物回滚不会影响到其他的语句
 
     @Autowired
     private DataSource myDataSource;
 
     public Connection getConnection(boolean satrtTrans) throws SQLException{
-        if(connection.get()!=null){
+        if(connection.get() != null){
             return connection.get();
         }else{
             connection.set(myDataSource.getConnection());
         }
 
-        if(satrtTrans){
+        if(satrtTrans){//开启事物 吧事物默认提交关闭
             System.out.println("开启事物");
             connection.get().setAutoCommit(false);
         }
-        return connection.get();
+        return connection.get();//返回数据库链接
     }
 
     public void clear(){

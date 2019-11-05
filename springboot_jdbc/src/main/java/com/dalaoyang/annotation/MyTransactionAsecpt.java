@@ -17,15 +17,15 @@ public class MyTransactionAsecpt {
     @Autowired
     MyTransactionManage myTransactionManage;
 
-    @Around("@annotation(MyTransacation)")
+    @Around("@annotation(MyTransacation)")//捕获MyTransacation注解 增加切面
     public Object doTransactional(ProceedingJoinPoint proceedingJoinPoint)throws SQLException{
 
         Connection connection = null;
         System.out.println("目标前置");
         try {
-            connection = myTransactionManage.getConnection(true);
-            proceedingJoinPoint.proceed();
-            connection.commit();
+            connection = myTransactionManage.getConnection(true);//增加事物管理器，参数 true开启事物
+            proceedingJoinPoint.proceed();//执行代理里面真正的方法内容
+            connection.commit();//事物提交
         }catch (Throwable throwable){
             throwable.printStackTrace();
             if(connection!=null){
