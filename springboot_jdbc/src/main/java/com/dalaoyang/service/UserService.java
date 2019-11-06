@@ -2,13 +2,15 @@ package com.dalaoyang.service;
 
 import com.dalaoyang.annotation.MyTransacation;
 import com.dalaoyang.jdbcUtil.MyjdbcTemplate;
+import com.dalaoyang.proxy.TimeConsumingStatistics;
+import com.dalaoyang.service.imp.UserServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
 
 @Service
-public class UserService {
+public class UserService implements UserServiceImp {
 
     @Autowired
     MyjdbcTemplate myjdbcTemplate;

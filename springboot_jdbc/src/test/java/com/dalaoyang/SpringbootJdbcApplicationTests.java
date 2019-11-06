@@ -2,7 +2,10 @@ package com.dalaoyang;
 
 import com.dalaoyang.annotation.MyTransacation;
 import com.dalaoyang.jdbcUtil.MyjdbcTemplate;
+import com.dalaoyang.proxy.DynamicProxy;
+import com.dalaoyang.service.imp.LuluseImp;
 import com.dalaoyang.service.UserService;
+import com.dalaoyang.service.Luluse;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,6 +15,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.sql.DataSource;
+import java.lang.reflect.Method;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -66,5 +70,11 @@ public class SpringbootJdbcApplicationTests {
         userService.fun();
     }
 
-
+    @Test
+    public void testDynamicProxy(){
+//        Method method = new Method();
+        Luluse zhangsan = new LuluseImp();
+        Luluse luluse = DynamicProxy.getProxy(zhangsan,zhangsan.getClass());
+        luluse.luluse("张三");
+    }
 }
