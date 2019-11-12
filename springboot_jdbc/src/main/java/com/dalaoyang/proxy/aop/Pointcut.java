@@ -15,7 +15,7 @@ public class Pointcut {
     }
 
     public boolean matchClass(Class<?> clazz){
-        return clazz.getName().matches(methodPattern);
+        return clazz.getName().matches(classPattern);
     }
 
     public boolean matchMethod(Method method){

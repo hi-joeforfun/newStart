@@ -7,7 +7,8 @@ import java.util.Random;
 
 public class LuluseImp implements Luluse {
 
-
+    public LuluseImp() {
+    }
 
     @Override
     public void luluse(String name) {
