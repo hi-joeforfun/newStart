@@ -27,6 +27,8 @@ public class IocContainer {
             this.beanMap.put(beanName,bean);
         }
         return  bean;
+
+        
     }
 
     private Object proxyEnhance(Object bean) {
