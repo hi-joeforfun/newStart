@@ -80,7 +80,6 @@ public class SpringbootJdbcApplicationTests {
 
     @Test
     public void action()throws SQLException {
-        System.out.println("joe");
-        System.out.println("aton");
+       System.out.println("aton");System.out.println(" 我是aton 卧槽");
     }
 }
