@@ -16,6 +16,7 @@ public class User implements RowMapper<User> {
     private int id;
     private String user_name;
     private String pass_word;
+    private String hard;
 
     public User(int id, String user_name, String pass_word) {
         this.id = id;
