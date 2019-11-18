@@ -77,4 +77,9 @@ public class SpringbootJdbcApplicationTests {
         Luluse luluse = DynamicProxy.getProxy(zhangsan,zhangsan.getClass());
         luluse.luluse("张三");
     }
+
+    @Test
+    public void action()throws SQLException {
+        System.out.println("joe");
+    }
 }
