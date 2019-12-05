@@ -16,7 +16,7 @@ public class MyInvokeHandle implements InvocationHandler {
         long stime = System.currentTimeMillis();
         Object ret = method.invoke(target,args);
         long useTime = System.currentTimeMillis();
-        System.out.println("记录"+ this.target.getClass()+"."+method.getName()+"耗时间："+(useTime/1000));
+        System.out.println("记录"+ this.target.getClass()+"."+method.getName()+"耗时间："+(useTime-stime/1000));
         return ret;
     }
 }

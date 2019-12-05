@@ -16,7 +16,7 @@ public class AopInvokeHandle implements InvocationHandler {
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         if(this.aspect.getPointcut().matchMethod(method)){
-            return this.aspect.getAdvice().invoke(target,method,args);
+            return this.aspect.getAdvice().invoke(target,method,args);// method 就是 luluse的方法
         }
         return method.invoke(target,args);
     }

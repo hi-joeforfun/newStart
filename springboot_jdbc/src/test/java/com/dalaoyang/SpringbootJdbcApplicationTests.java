@@ -76,5 +76,6 @@ public class SpringbootJdbcApplicationTests {
         Luluse zhangsan = new LuluseImp();
         Luluse luluse = DynamicProxy.getProxy(zhangsan,zhangsan.getClass());
         luluse.luluse("张三");
+        luluse.test();
     }
 }

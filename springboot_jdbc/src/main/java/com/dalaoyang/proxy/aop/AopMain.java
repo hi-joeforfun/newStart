@@ -19,6 +19,10 @@ public class AopMain {
         Luluse luluse = (Luluse) ioc.getBean("luluse");
         luluse.luluse("joe");
 
+//        LuluseImp luluse = new LuluseImp();
+//        TimeAdvice timeAdvice = new TimeAdvice();
+////        Object[] a = new Object[3];
+//        timeAdvice.invoke(luluse,luluse.getClass().getMethod("luluse",String.class),null);
 
     }
 }

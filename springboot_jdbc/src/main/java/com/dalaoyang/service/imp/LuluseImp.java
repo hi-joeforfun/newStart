@@ -21,5 +21,10 @@ public class LuluseImp implements Luluse {
             e.printStackTrace();
         }
     }
+
+    @Override
+    public void test() {
+        System.out.println("in test");
+    }
 }
 
