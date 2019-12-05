@@ -78,4 +78,14 @@ public class SpringbootJdbcApplicationTests {
         luluse.luluse("张三");
         luluse.test();
     }
+
+    @Test
+    public void action()throws SQLException {
+       System.out.println("aton");System.out.println(" 我是aton 卧槽");
+
+        System.out.println("joe"); System.out.println(" 我是joe 卧槽");
+
+        System.out.println(" aton大佬");
+
+    }
 }

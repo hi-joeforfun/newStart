@@ -9,7 +9,7 @@ public class TimeAdvice implements Advice {
         long stime = System.currentTimeMillis();
         Object ret = method.invoke(target,args);
         long useTime = System.currentTimeMillis();
-        System.out.println("记录"+ target.getClass()+"."+method.getName()+"耗时间："+(useTime/1000));
+        System.out.println("记录"+ target.getClass()+"."+method.getName()+"耗时间："+((float)(useTime-stime)/1000));
         return ret;
     }
 }
