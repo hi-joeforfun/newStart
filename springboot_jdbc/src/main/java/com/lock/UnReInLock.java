@@ -1,4 +1,4 @@
-package com.dalaoyang.lock;
+package com.lock;
 
 public class UnReInLock {
     private boolean isLocked = false;

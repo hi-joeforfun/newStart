@@ -11,7 +11,8 @@ public class MyInvokeHandle implements InvocationHandler {
         this.target = object;
     }
 
-    @Override
+    //该 invoke方法是吧该对象的所有方法都进行代理
+    @Override//Object proxy代理后的对象   Method method 代理的方法  Object[] args 传参
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         long stime = System.currentTimeMillis();
         Object ret = method.invoke(target,args);
