@@ -4,6 +4,7 @@ import java.lang.reflect.Method;
 
 public class TimeAdvice implements Advice {
 
+    //具体业增强 业务操作方法
     @Override
     public Object invoke(Object target, Method method, Object[] args) throws Exception {
         long stime = System.currentTimeMillis();
