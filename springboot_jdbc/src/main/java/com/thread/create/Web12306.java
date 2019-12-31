@@ -5,7 +5,7 @@ package com.thread.create;
  *
  */
 public class Web12306 implements Runnable {
-	private int num =50;
+	private  int  num = 10;
 
 	@Override
 	public void run() {
@@ -13,7 +13,8 @@ public class Web12306 implements Runnable {
 			if(num<=0){
 				break; //跳出循环
 			}
-			System.out.println(Thread.currentThread().getName()+"抢到了"+num--);
+			num = num -1;
+			System.out.println(Thread.currentThread().getName()+"抢到了"+num);
 		}
 	}
 
@@ -24,6 +25,10 @@ public class Web12306 implements Runnable {
 		Thread t1 =new Thread(web,"路人甲");
 		Thread t2 =new Thread(web,"黄牛已");
 		Thread t3 =new Thread(web,"攻城师");
+		Thread t4 =new Thread(web,"1路人甲");
+		Thread t5 =new Thread(web,"2路人甲");
+		Thread t6 =new Thread(web,"3路人甲");
+
 		//启动线程
 		t1.start();
 		t2.start();

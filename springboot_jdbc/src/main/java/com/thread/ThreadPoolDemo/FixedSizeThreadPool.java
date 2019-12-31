@@ -6,9 +6,9 @@ import java.util.List;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 public class FixedSizeThreadPool {
-    //     抛异常  特素质   阻塞    超时
-    //插入 add    offer   put     off(e,time)
-    //移除 remove  poll  take     poll（time）
+    //     抛异常  返回布尔     阻塞    超时
+    //插入 add       offer      put     off(e,time)
+    //移除 remove    poll      take     poll（time）
     public BlockingQueue<Task> blockingQueue;
 
     public List<Thread> workers;

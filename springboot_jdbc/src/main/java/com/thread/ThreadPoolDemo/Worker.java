@@ -16,7 +16,7 @@ public class Worker extends Thread{//工作者
                 if(fixedSizeThreadPool.isWorking){
                     task = this.fixedSizeThreadPool.blockingQueue.take();//取出任务，阻塞类型的取出 取不到就会阻塞
                 }else{
-                    task = this.fixedSizeThreadPool.blockingQueue.poll();//取出任务，非阻塞类型的取出
+                    task = this.fixedSizeThreadPool.blockingQueue.poll();//取出任务，为关闭线程池后，工作线程执行完任务task后，关闭线程，非阻塞类型的取出
                 }
             } catch (InterruptedException e){
                 e.printStackTrace();

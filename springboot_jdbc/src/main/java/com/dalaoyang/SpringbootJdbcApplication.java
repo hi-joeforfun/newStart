@@ -11,6 +11,8 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 import javax.sql.DataSource;
 
+
+//  https://sylvanassun.github.io/2018/01/08/2018-01-08-spring_boot_auto_configure/
 @SpringBootApplication
 @EnableAspectJAutoProxy
 public class SpringbootJdbcApplication {
