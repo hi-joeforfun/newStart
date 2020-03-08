@@ -11,7 +11,7 @@ public class RunnableDemo {
         public static void main(String[] args) {
             TestRunnable testRunnable = new TestRunnable();
             new Thread(testRunnable).start();
-
+            System.out.println("dev");
 
             (new Runnable() {
                 @Override
