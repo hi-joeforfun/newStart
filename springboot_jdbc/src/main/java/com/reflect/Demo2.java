@@ -1,30 +1,33 @@
 package com.reflect;
 
+import java.io.FileReader;
+import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Properties;
+
 
 /*
- * 通过反射越过泛型检查
- *
- * 例如：有一个String泛型的集合，怎样能向这个集合中添加一个Integer类型的值？
+ * 我们利用反射和配置文件，可以使：应用程序更新时，对源码无需进行任何修改
+ * 我们只需要将新类发送给客户端，并修改配置文件即可
  */
-public class Demo {
-    public static void main(String[] args) throws Exception{
-        ArrayList<String> strList = new ArrayList<>();
-        strList.add("aaa");
-        strList.add("bbb");
+public class Demo2 {
+    public static void main(String[] args) throws Exception {
+        //通过反射获取Class对象
+        Class stuClass = Class.forName(getValue("className"));//"cn.fanshe.Student"
+        //2获取show()方法
+        Method m = stuClass.getMethod(getValue("methodName"));//show
+        //3.调用show()方法
+        m.invoke(stuClass.getConstructor().newInstance());
 
-        //	strList.add(100);
-        //获取ArrayList的Class对象，反向的调用add()方法，添加数据
-        Class listClass = strList.getClass(); //得到 strList 对象的字节码 对象
-        //获取add()方法
-        Method m = listClass.getMethod("add", Object.class);
-        //调用add()方法
-        m.invoke(strList, 100);
+    }
 
-        //遍历集合
-        for(Object obj : strList){
-            System.out.println(obj);
-        }
+    //此方法接收一个key，在配置文件中获取相应的value
+    public static String getValue(String key) throws IOException {
+        Properties pro = new Properties();//获取配置文件的对象
+        FileReader in = new FileReader("E:\\git\\newStart\\springboot_jdbc\\src\\main\\java\\com\\reflect\\pro.txt");//获取输入流
+        pro.load(in);//将流加载到配置文件对象中
+        in.close();
+        return pro.getProperty(key);//返回根据key获取的value值
     }
 }

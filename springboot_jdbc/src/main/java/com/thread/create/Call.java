@@ -6,42 +6,41 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 /**
- * ʹ��Callable�����߳�
+ * 使用Callable创建线程
  * @author Administrator
  *
  */
 public class Call {
 	public static void main(String[] args) throws InterruptedException, ExecutionException {
-		//�����߳�
+		//创建线程
 		ExecutorService  ser=Executors.newFixedThreadPool(2);
-		Race tortoise = new Race("�ϲ���",1000);
-		Race rabbit = new Race("С����",500);
-		//��ȡֵ
+		Race tortoise = new Race("老不死",1000);
+		Race rabbit = new Race("小兔子",500);
+		//获取值
 		Future<Integer> result1 =ser.submit(tortoise) ;
 		Future<Integer> result2 =ser.submit(rabbit) ;
-		
-		Thread.sleep(2000); //2��
-		tortoise.setFlag(false); //ֹͣ�߳���ѭ��
+
+		Thread.sleep(2000); //2秒
+		tortoise.setFlag(false); //停止线程体循环
 		rabbit.setFlag(false);
-		
+
 		int num1 =result1.get();
 		int num2 =result2.get();
-		System.out.println("�ڹ�����-->"+num1+"��");
-		System.out.println("С��������-->"+num2+"��");
-		//ֹͣ���� 
+		System.out.println("乌龟跑了-->"+num1+"步");
+		System.out.println("小兔子跑了-->"+num2+"步");
+		//停止服务
 		ser.shutdownNow();
 
 	}
 }
 
-
 class Race implements Callable<Integer>{
-	private String name ; //����
-	private long time; //��ʱʱ��
+	private String name ; //名称
+	private long time; //延时时间
 	private boolean flag =true;
-	private int step =0; //��
+	private int step =0; //步
 	public Race() {
-	}	
+	}
 
 	public Race(String name) {
 		super();
@@ -56,7 +55,7 @@ class Race implements Callable<Integer>{
 	@Override
 	public Integer call() throws Exception {
 		while(flag){
-			Thread.sleep(time); //��ʱ
+			Thread.sleep(time); //延时
 			step++;
 		}
 		return step;
@@ -70,7 +69,7 @@ class Race implements Callable<Integer>{
 		this.name = name;
 	}
 
-	
+
 
 	public long getTime() {
 		return time;
@@ -95,5 +94,5 @@ class Race implements Callable<Integer>{
 	public void setStep(int step) {
 		this.step = step;
 	}
-	
+
 }

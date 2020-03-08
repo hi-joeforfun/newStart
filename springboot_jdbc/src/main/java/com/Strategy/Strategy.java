@@ -1,4 +1,5 @@
 package com.Strategy;
 
-public class Strategy {
+public interface Strategy {
+    public Double calRecharge(Double charge ,RechargeTypeEnum type );
 }

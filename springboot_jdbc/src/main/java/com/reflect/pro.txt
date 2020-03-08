@@ -1,0 +1,7 @@
+className = cn.fanshe.Student
+methodName = show
+
+
+
+className = cn.fanshe.Student2
+methodName = show2
