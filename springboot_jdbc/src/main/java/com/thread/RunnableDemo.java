@@ -12,8 +12,8 @@ public class RunnableDemo {
             TestRunnable testRunnable = new TestRunnable();
             new Thread(testRunnable).start();
             System.out.println("master");
-            System.out.println("dev");
-            System.out.println("dev");
+            System.out.println("master");
+            System.out.println("master");
             (new Runnable() {
                 @Override
                 public void run() {
