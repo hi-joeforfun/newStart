@@ -1,0 +1,108 @@
+
+
+
+    public static Class<?> getProxyClass(ClassLoader loader,
+                                             Class<?>... interfaces)
+        throws IllegalArgumentException
+        {
+        // 如果目标类实现的接口数大于65535个则抛出异常
+        if (interfaces.length > 65535) {
+            throw new IllegalArgumentException("interface limit exceeded");
+        }
+
+        // 声明代理对象所代表的Class对象
+        Class proxyClass = null;
+
+        String[] interfaceNames = new String[interfaces.length];
+
+        Set interfaceSet = new HashSet();   // for detecting duplicates
+
+        // 遍历目标类所实现的接口
+        for (int i = 0; i < interfaces.length; i++) {
+
+            // 拿到目标类实现的接口的名称
+            String interfaceName = interfaces[i].getName();
+            //验证类加载器加载接口得到对象是否与由apply函数参数传入的对象相同
+            Class interfaceClass = null;
+            try {
+            // 加载目标类实现的接口到内存中
+            interfaceClass = Class.forName(interfaceName, false, loader);
+            } catch (ClassNotFoundException e) {
+            }
+            //验证这个Class对象是不是接口
+            if (interfaceClass != interfaces[i]) {
+            throw new IllegalArgumentException(
+                interfaces[i] + " is not visible from class loader");
+            }
+
+            // 中间省略了一些无关紧要的代码 .......
+
+            // 把目标类实现的接口代表的Class对象放到Set中
+            interfaceSet.add(interfaceClass);
+
+            interfaceNames[i] = interfaceName;
+        }
+
+        // 把目标类实现的接口名称作为缓存（Map）中的key
+        Object key = Arrays.asList(interfaceNames);
+
+        Map cache;
+
+        synchronized (loaderToCache) {
+            // 从缓存中获取cache
+            cache = (Map) loaderToCache.get(loader);
+            if (cache == null) {
+            // 如果获取不到，则新建地个HashMap实例
+            cache = new HashMap();
+            // 把HashMap实例和当前加载器放到缓存中
+            loaderToCache.put(loader, cache);
+            }
+
+        }
+
+        synchronized (cache) {
+
+            do {
+            // 根据接口的名称从缓存中获取对象
+            Object value = cache.get(key);
+            if (value instanceof Reference) {
+                proxyClass = (Class) ((Reference) value).get();
+            }
+            if (proxyClass != null) {
+                // 如果代理对象的Class实例已经存在，则直接返回
+                return proxyClass;
+            } else if (value == pendingGenerationMarker) {
+                try {
+                cache.wait();
+                } catch (InterruptedException e) {
+                }
+                continue;
+            } else {
+                cache.put(key, pendingGenerationMarker);
+                break;
+            }
+            } while (true);
+        }
+
+        try {
+            // 中间省略了一些代码 .......
+
+            // 这里就是动态生成代理对象的最关键的地方
+            byte[] proxyClassFile = ProxyGenerator.generateProxyClass(
+                proxyName, interfaces);
+            try {
+                // 根据代理类的字节码生成代理类的实例
+                proxyClass = defineClass0(loader, proxyName,
+                proxyClassFile, 0, proxyClassFile.length);
+            } catch (ClassFormatError e) {
+                throw new IllegalArgumentException(e.toString());
+            }
+            }
+            // add to set of all generated proxy classes, for isProxyClass
+            proxyClasses.put(proxyClass, null);
+
+        }
+        // 中间省略了一些代码 .......
+
+        return proxyClass;
+        }

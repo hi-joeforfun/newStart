@@ -33,8 +33,8 @@ public class CountDownLatchExample1 {
             });
         }
         System.out.println("mark");
-        countDownLatch.await();
-        threadPool.shutdown();
+//        countDownLatch.await();
+//        threadPool.shutdown();
         System.out.println("finish");
     }
 

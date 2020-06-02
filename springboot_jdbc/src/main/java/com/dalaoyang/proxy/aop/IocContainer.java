@@ -25,6 +25,9 @@ public class IocContainer {
         //如果是空就，就去加载该实体对象，该过程中就会涉及到 是否做增强操作
         if(bean ==null){
             bean = this.createInstance(beanName);//加载该bean定义的 实体
+            if(bean ==null){
+                return null;
+            }
             bean = this.proxyEnhance(bean);
             this.beanMap.put(beanName,bean);
         }
@@ -42,6 +45,9 @@ public class IocContainer {
     }
 
     private Object createInstance(String beanName) throws Exception{
+        if(this.beanDefinitionMap.get(beanName) == null){
+            return null ;
+        }
         return this.beanDefinitionMap.get(beanName).newInstance();
     }
 

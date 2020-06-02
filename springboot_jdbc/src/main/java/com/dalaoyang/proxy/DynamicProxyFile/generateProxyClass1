@@ -1,0 +1,30 @@
+    public static byte[] generateProxyClass(final String name,
+                                               Class[] interfaces)
+       {
+           ProxyGenerator gen = new ProxyGenerator(name, interfaces);
+        // 这里动态生成代理类的字节码，由于比较复杂就不进去看了
+           final byte[] classFile = gen.generateClassFile();
+
+        // 如果saveGeneratedFiles的值为true，则会把所生成的代理类的字节码保存到硬盘上
+           if (saveGeneratedFiles) {
+               java.security.AccessController.doPrivileged(
+               new java.security.PrivilegedAction<Void>() {
+                   public Void run() {
+                       try {
+                           FileOutputStream file =
+                               new FileOutputStream(dotToSlash(name) + ".class");
+                           file.write(classFile);
+                           file.close();
+                           return null;
+                       } catch (IOException e) {
+                           throw new InternalError(
+                               "I/O exception saving generated file: " + e);
+                       }
+                   }
+               });
+           }
+
+        // 返回代理类的字节码
+           return classFile;
+       }
+

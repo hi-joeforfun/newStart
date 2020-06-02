@@ -7,6 +7,7 @@ public class AopMain {
 
     public static void main(String[] args) throws Exception{
         IocContainer ioc = new IocContainer();
+        //把LuluseImp.class的定义到ioc容器里面
         ioc.addBeanDefinition("luluse", LuluseImp.class);
 
         //切点 包括目标类和目标方法，用正则表达式来进行判断

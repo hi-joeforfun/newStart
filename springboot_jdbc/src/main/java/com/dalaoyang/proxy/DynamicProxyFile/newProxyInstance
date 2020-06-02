@@ -1,0 +1,37 @@
+    /**
+     * loader:类加载器
+     * interfaces:目标对象实现的接口
+     * h:InvocationHandler的实现类
+     */
+    public static Object newProxyInstance(ClassLoader loader,
+                          Class<?>[] interfaces,
+                          InvocationHandler h)
+        throws IllegalArgumentException
+        {
+        if (h == null) {
+            throw new NullPointerException();
+        }
+
+        /*
+         * Look up or generate the designated proxy class.
+         */
+        Class cl = getProxyClass(loader, interfaces);
+
+        /*
+         * Invoke its constructor with the designated invocation handler.
+         */
+        try {
+                // 调用代理对象的构造方法（也就是$Proxy0(InvocationHandler h)）
+            Constructor cons = cl.getConstructor(constructorParams);
+                // 生成代理类的实例并把MyInvocationHandler的实例传给它的构造方法
+            return (Object) cons.newInstance(new Object[] { h });
+        } catch (NoSuchMethodException e) {
+            throw new InternalError(e.toString());
+        } catch (IllegalAccessException e) {
+            throw new InternalError(e.toString());
+        } catch (InstantiationException e) {
+            throw new InternalError(e.toString());
+        } catch (InvocationTargetException e) {
+            throw new InternalError(e.toString());
+        }
+        }
