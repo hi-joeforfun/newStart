@@ -11,7 +11,7 @@ import java.sql.SQLException;
 @Component
 public class MyTransactionManage {
 
-    private ThreadLocal<Connection> connection;//用ThreadLocal隔离每个connection 链接 让事物回滚不会影响到其他的语句
+    private ThreadLocal<Connection> connection = new ThreadLocal<>();//用ThreadLocal隔离每个connection 链接 让事物回滚不会影响到其他的语句
 
     @Autowired
     private DataSource myDataSource;
