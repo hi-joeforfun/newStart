@@ -1,4 +1,4 @@
-package com.netty.nio;
+package com.netty.nio.ex;
 
 import java.io.FileOutputStream;
 import java.nio.ByteBuffer;
